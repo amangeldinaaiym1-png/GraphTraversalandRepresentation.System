@@ -1,72 +1,23 @@
 public class Experiment {
 
-    // Run BFS and DFS
-    public void runTraversals(Graph g) {
+    public void run() {
 
-        long startBFS = System.nanoTime();
+        Graph g = new Graph();
+
+        for (int i = 0; i < 6; i++) {
+            g.addVertex(i);
+        }
+
+        g.addEdge(0, 1, 4);
+        g.addEdge(0, 2, 1);
+        g.addEdge(2, 1, 2);
+        g.addEdge(1, 3, 1);
+        g.addEdge(2, 3, 5);
+        g.addEdge(3, 4, 3);
+        g.addEdge(4, 5, 2);
+
         g.bfs(0);
-        long endBFS = System.nanoTime();
-
-        long bfsTime = endBFS - startBFS;
-
-        long startDFS = System.nanoTime();
         g.dfs(0);
-        long endDFS = System.nanoTime();
-
-        long dfsTime = endDFS - startDFS;
-
-        System.out.println("BFS Time: " + bfsTime + " ns");
-        System.out.println("DFS Time: " + dfsTime + " ns");
-    }
-
-    // Multiple tests
-    public void runMultipleTests() {
-
-        int[] sizes = {10, 30, 100};
-
-        for (int size : sizes) {
-
-            System.out.println("\n=========================");
-            System.out.println("Graph Size: " + size);
-            System.out.println("=========================");
-
-            Graph graph = createGraph(size);
-
-            if (size == 10) {
-                graph.printGraph();
-            }
-
-            runTraversals(graph);
-        }
-    }
-
-    // Create graph
-    private Graph createGraph(int size) {
-
-        Graph graph = new Graph();
-
-        // Add vertices
-        for (int i = 0; i < size; i++) {
-            graph.addVertex(new Vertex(i));
-        }
-
-        // Add edges
-        for (int i = 0; i < size - 1; i++) {
-
-            graph.addEdge(i, i + 1);
-
-            // Extra edges
-            if (i + 2 < size) {
-                graph.addEdge(i, i + 2);
-            }
-        }
-
-        return graph;
-    }
-
-    // Print results
-    public void printResults() {
-
-        System.out.println("\nExperiment completed successfully.");
+        g.dijkstra(0);
     }
 }
